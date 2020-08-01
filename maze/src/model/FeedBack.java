@@ -12,6 +12,7 @@ public class FeedBack {
     public static final int BLOCK = 1;
     public static final int BOUNDARY = 2;
     public static final int BLOCK_OR_BOUNDARY = 3;
+    public static final int FINAL = 4;
 
 
     private int type;

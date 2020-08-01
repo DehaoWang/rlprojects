@@ -1,4 +1,4 @@
-package model;
+package rule;
 
 /**
  * Created by wangdehao on 18/5/14.

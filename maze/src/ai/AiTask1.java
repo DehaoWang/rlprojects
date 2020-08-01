@@ -11,4 +11,6 @@ public interface AiTask1 {
     public Location submitLocationOnExplorations(int numOfExp, int maxStepsForEachExp);
 
     Direction submitPotentialMove(Location currLocation) throws InterruptedException;
+
+    Location submitNextLocation(Location currLocation) throws InterruptedException;
 }

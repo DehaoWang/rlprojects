@@ -19,20 +19,31 @@ public class Game {
 
     public void printState(){
         for(int i = -1; i < maze.getMazeSizeM(); i++){
-            System.out.print(String.format("%-3d", i));
-        }
-        System.out.println();
-        for(int i = 0; i < maze.getMazeSizeM(); i++){
-            System.out.print(String.format("%-3d", i));
-            for(int j = 0; j < maze.getMazeSizeN(); j++){
-                if(i == player.getCurrLocation().getX() && j == player.getCurrLocation().getY()){
-                    System.out.print(String.format("%-3s", player.getInitial()));
-                }
-                else {
-                    System.out.print(String.format("%-3s", maze.getSpace(i, j).getFiller()));
+            if(i == -1){
+                for(int j = 0; j < 4; j++){
+                    System.out.print(" ");
                 }
             }
+            else {
+                System.out.print(String.format("%-4d", i));
+            }
+        }
+        for(int i = 0; i < 2; i++){
             System.out.println();
+        }
+        for(int i = 0; i < maze.getMazeSizeM(); i++){
+            System.out.print(String.format("%-4d", i));
+            for(int j = 0; j < maze.getMazeSizeN(); j++){
+                if(i == player.getCurrLocation().getX() && j == player.getCurrLocation().getY()){
+                    System.out.print(String.format("%-4s", player.getInitial()));
+                }
+                else {
+                    System.out.print(String.format("%-4s", maze.getSpace(i, j).getFiller()));
+                }
+            }
+            for(int k = 0; k < 2; k++){
+                System.out.println();
+            }
         }
     }
 

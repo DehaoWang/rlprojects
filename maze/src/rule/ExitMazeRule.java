@@ -1,4 +1,6 @@
-package model;
+package rule;
+
+import model.Location;
 
 /**
  * Created by wangdehao on 18/5/14.

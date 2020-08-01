@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by wangdehao on 18/1/25.
  */
@@ -7,6 +10,10 @@ public class Maze {
     private Space[][] maze;
     private int mazeSizeM;
     private int mazeSizeN;
+
+    private Location startLoc;
+    private Location endLoc;
+
 
     public Maze(int mazeSizeM, int mazeSizeN) {
         this.mazeSizeM = mazeSizeM;
@@ -55,5 +62,36 @@ public class Maze {
 
     public Space getSpace(int i, int j){
         return maze[i][j];
+    }
+
+    public boolean isBlock(int x, int y) {
+        return maze[x][y].isBlocked();
+    }
+
+    public List<Location> getValidNextSpaces(int im, int in) {
+        List<Location> nextLocations = new ArrayList<>();
+        Location curr = new Location(im, in);
+        for(int dir: Direction.DIRECTIONS){
+            Location next = Engine.getPotLoc(curr, new Direction(dir));
+            nextLocations.add(next);
+        }
+        return nextLocations;
+    }
+
+
+    public void setStartLoc(Location startLoc) {
+        this.startLoc = startLoc;
+    }
+
+    public Location getStartLoc() {
+        return startLoc;
+    }
+
+    public void setEndLoc(Location endLoc) {
+        this.endLoc = endLoc;
+    }
+
+    public Location getEndLoc() {
+        return endLoc;
     }
 }

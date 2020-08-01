@@ -1,5 +1,8 @@
 package model;
 
+import rule.ExitMazeRule;
+import rule.RemainingStepRule;
+
 /**
  * Created by wangdehao on 18/5/14.
  */
