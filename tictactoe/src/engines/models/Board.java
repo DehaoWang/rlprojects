@@ -1,7 +1,8 @@
-package engines;
+package engines.models;
 
 import engines.constants.Constant;
-import javafx.geometry.Pos;
+import engines.models.Move;
+import engines.models.Position;
 
 public class Board {
     private final int N = 3;

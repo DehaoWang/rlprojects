@@ -1,4 +1,4 @@
-package engines;
+package engines.models;
 
 public class Move {
     private char symbol;

@@ -1,4 +1,4 @@
-package engines;
+package engines.models;
 
 import engines.constants.Constant;
 
@@ -15,7 +15,7 @@ public class Player {
         setSymbol(symbol);
     }
 
-    public Position getPosOnBoard(Board board) throws IOException {
+    public Position getPosOnBoard(Board board, boolean show) throws IOException {
         // TODO: 2020-08-02
         Random random = new Random();
         while (true) {
@@ -24,7 +24,9 @@ public class Player {
             if (board.validPosition(position)) {
                 return position;
             } else {
-                System.out.println("Invalid Position! Please Reselect");
+                if (show) {
+                    System.out.println("Invalid Position! Please Reselect");
+                }
             }
         }
     }
@@ -57,7 +59,7 @@ public class Player {
         }
     }
 
-    public Move getMoveOnBoard(Board board) throws IOException {
-        return new Move(this.symbol, getPosOnBoard(board));
+    public Move getMoveOnBoard(Board board, boolean show) throws IOException {
+        return new Move(this.symbol, getPosOnBoard(board, show));
     }
 }

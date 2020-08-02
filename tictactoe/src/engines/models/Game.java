@@ -1,6 +1,4 @@
-package engines;
-
-import engines.constants.Constant;
+package engines.models;
 
 import java.io.IOException;
 
@@ -20,21 +18,26 @@ public class Game {
         this.currTurn = currTurn;
     }
 
-    public void playInTurns() throws IOException {
+    public char playInTurns(boolean show) throws IOException {
         while (true && board.hasValidMove()) {
             Move move;
             if (currTurn == 0) {
-                move = player0.getMoveOnBoard(board);
+                move = player0.getMoveOnBoard(board, show);
             } else {
-                move = player1.getMoveOnBoard(board);
+                move = player1.getMoveOnBoard(board, show);
             }
             board.updateByMove(move);
             currTurn = 1 - currTurn;
-            board.show();
+            if (show) {
+                board.show();
+            }
             if (board.isWinner(move)) {
-                System.out.println("The winner is " + move.getSymbol());
-                return;
+                if (show) {
+                    System.out.println("The winner is " + move.getSymbol());
+                }
+                return move.getSymbol();
             }
         }
+        return 'T';
     }
 }
