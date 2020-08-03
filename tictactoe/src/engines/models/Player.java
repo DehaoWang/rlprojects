@@ -16,7 +16,6 @@ public class Player {
     }
 
     public Position getPosOnBoard(Board board, boolean show) throws IOException {
-        // TODO: 2020-08-02
         Random random = new Random();
         while (true) {
             Position position = new Position(random.nextInt(Constant.DEF_BOARD_SIZE),

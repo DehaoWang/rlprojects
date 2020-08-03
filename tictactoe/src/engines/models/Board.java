@@ -1,24 +1,23 @@
 package engines.models;
 
 import engines.constants.Constant;
-import engines.models.Move;
-import engines.models.Position;
 
 public class Board {
-    private final int N = 3;
+    private final int N = Constant.DEF_BOARD_SIZE;
+    private final char C = Constant.DEF_SYMBOL;
     private char[][] board;
 
     public Board() {
         this.board = new char[N][N];
         for (int k = 0; k < N * N; k++) {
-            board[k / N][k % N] = Constant.DEF_SYMBOL;
+            board[k / N][k % N] = C;
         }
     }
 
     public boolean validPosition(Position position) {
         int x = position.getX();
         int y = position.getY();
-        return board[x][y] == Constant.DEF_SYMBOL;
+        return board[x][y] == C;
     }
 
     public void updateByMove(Move move) {
@@ -115,9 +114,8 @@ public class Board {
     public boolean hasValidMove() {
         for (int i = 0; i < N; i++) {
             for (int j = 0; j < N; j++) {
-                if (board[i][j] == Constant.DEF_SYMBOL) {
+                if (board[i][j] == C)
                     return true;
-                }
             }
         }
         return false;
