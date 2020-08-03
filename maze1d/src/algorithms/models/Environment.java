@@ -41,7 +41,7 @@ public class Environment {
     public Map<State, List<Action>> generateState2Actions() {
         Map<State, List<Action>> state2Actions = new HashMap<>();
         for (int i = 0; i < stateNum; i++) {
-            List<Action> actions = Arrays.asList(new Action(-1), new Action(1));
+            List<Action> actions = Arrays.asList(new Action(1), new Action(-1));
             State state = new State(i);
             state2Actions.put(state, actions);
             stateMap.put(i, state);

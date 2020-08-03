@@ -7,6 +7,7 @@ import algorithms.models.State;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class World {
     public static void main(String[] args) {
@@ -30,7 +31,15 @@ public class World {
         Environment env = new Environment(maze1dSize);
         Map<State, List<Action>> state2Actions = env.generateState2Actions();
 //        System.out.println(state2Actions);
-        Agent agent = new Agent(0.9, state2Actions);
-        agent.trainInEnv(env, 13);
+        Agent agent = new Agent(0.9, 0.9, 0.1, state2Actions);
+
+        agent.showQTable();
+        agent.trainInEnv(env, 30);
+        agent.showQTable();
+
+        Random random = new Random();
+        for (int i = 0; i < 33; i++) {
+            System.out.println(random.nextDouble());
+        }
     }
 }

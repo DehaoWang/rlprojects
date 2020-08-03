@@ -9,8 +9,7 @@ import java.util.Map;
 
 public class PlayerRL extends Agent {
 
-
-    public PlayerRL(double e, Map<State, List<Action>> state2Actions) {
-        super(e, state2Actions);
+    public PlayerRL(double e, double g, double a, Map<State, List<Action>> state2Actions) {
+        super(e, g, a, state2Actions);
     }
 }

@@ -5,6 +5,7 @@ import algorithms.RL;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Stack;
 
 public class Agent implements RL {
     private State currState;
@@ -12,10 +13,17 @@ public class Agent implements RL {
     private Map<State, List<Action>> state2Actions;
     // e-greedy
     private double e;
+    // gamma: discount rate
+    private double g;
+    // alpha: learning rate
+    private double a;
+
     Random random = new Random();
 
-    public Agent(double e, Map<State, List<Action>> state2Actions) {
+    public Agent(double e, double g, double a, Map<State, List<Action>> state2Actions) {
         this.e = e;
+        this.g = g;
+        this.a = a;
         this.state2Actions = state2Actions;
         this.buildQTable(state2Actions);
     }
@@ -55,13 +63,32 @@ public class Agent implements RL {
             boolean terminated = false;
 //            environment.show();
             while (!terminated) {
+//                showQTable();
                 Action action = getActionByEGreedy(qTable, state);
                 Feedback feedback = environment.feedback(state, action);
-                double q = qTable.getQValue(state, action);
-//                if(feedback.getState() != Environment)
-                terminated = true;
-            }
-        }
+                State nextState = feedback.getState();
+                double reward = feedback.getReward();
+                double predictQ = qTable.getQValue(state, action);
+                double targetQ = 0;
 
+                if (nextState.getIdxInArray() >= state2Actions.size()) {
+                    targetQ = reward;
+                    // TODO: 2020-08-03 : step counter BUG
+//                    System.out.println(String.format("End @ Episode %3d: steps: %3d", i, steps));
+                    terminated = true;
+                } else {
+                    targetQ = reward + g * qTable.getMaxReward(nextState);
+                }
+                double updatedQ = predictQ + a * (targetQ - predictQ);
+                qTable.update(state, action, updatedQ);
+                state = nextState;
+                steps++;
+            }
+//            System.out.println(String.format("End @ Episode %3d: steps: %3d", i, steps));
+        }
+    }
+
+    public void showQTable() {
+        qTable.show();
     }
 }
